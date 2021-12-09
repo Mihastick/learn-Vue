@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        .cont {
+            border: 1px solid black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1em;
+            flex-direction: column;
+        }
+
+        button {
+            padding: 0.5em;
+            background: rgb(122, 122, 240);
+            color: white;
+            border: 1px solid black;
+            border-radius: 10px;
+        }
+
+        .imgCont {
+            margin-top: 1em;
+            width: 400px;
+            height: 400px;
+        }
+
+        .imgCont img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .tab {
+            width: 60%;
+            margin-top: 1em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .tab-header {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            flex-direction: row;
+            width: 100%;
+        }
+
+        .tab-header .tab-header-item {
+            border: 1px solid black;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            padding: 0.5em;
+            cursor: pointer;
+        }
+
+        .tab-body {
+            border: 1px solid black;
+            width: 100%;
+            height: 100px;
+        }
+
+        .range {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .options {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 1em;
+        }
+
+        .active {
+            background: cadetblue;
+        }
+
+        .check {
+            margin-top: 1em;
+        }
+
+        .square {
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            background: cadetblue;
+            border-radius: 50%;
+            margin-top: 0.5em;
+        }
+
+        .list {
+            margin-top: 1em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            border: 1px solid black;
+            padding: 0.5em;
+        }
+
+        .list input {
+            width: 12em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-top: 0.2em;
+            margin-bottom: 0.2em;
+        }
+
+        .list div {
+            border: 1px solid black;
+            width: 6em;
+            height: 1.5em;
+            margin-top: 0.2em;
+            margin-bottom: 0.2em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .colorImg {
+            margin-top: 1em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row;
+        }
+
+        .colorImg .colorBox {
+            margin: 0.5em;
+        }
+
+        .imgBox {
+            width: 300px;
+            height: 300px;
+            border: 1px solid;
+        }
+
+        .imgBox img {
+            width: 100%;
+            height: 100%;
+        }
+        .misli {
+            min-width:600px;
+            margin-top:1em;
+            border:1px solid black;
+            padding:0.5em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        .misli label {
+            display: flex;
+            align-items: center;
+            justify-content:center;
+            flex-direction: column;
+        }
+        .misli label input {
+            margin-top:0.5em;
+            margin-bottom: 0.5em;
+        }
+        .misli div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding:0.5em;
+            margin-top:0.5em;
+            border:1px solid black;
+            min-width: 300px;
+        }
+        .zadachi{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding:0.5em;
+            margin-top:1em;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script defer src="https://unpkg.com/vue@next"></script>
+    <script defer src='main.js'></script>
+</head>
+
+<body>
+    <div id="app">
+        <div class="cont">
+            <button @click='activeBtn'>{{active? 'Скрыть':'Показать'}} информацию</button>
+            <div v-if='active' class='imgCont'>
+                <img :src='imgSrc' alt="" @mouseenter='imgEnter' @mouseLeave='imgLeave'>
+            </div>
+
+            <div class="tab">
+                <div class="tab-header">
+                    <div class='tab-header-item' :class="{'active': item.title === currentItem.title}"
+                        v-for="(item,index) in array" @click="showCurrentItem(index)">{{item.title}}</div>
+                </div>
+                <div class="tab-body">
+                    <div class="tab-body-item">{{currentItem.content}}</div>
+                </div>
+            </div>
+
+            <div class="options">
+                <label for="range" class='range'>
+                    <input type="range" name='range' v-model='value'>
+                    <p class='range-value'>{{value}}</p>
+                    <input type="color" name='color' v-model='color'>
+                    <div class='check'><input type="checkbox" name='checkbox' v-model='square'>Квадрат</div>
+                    <div class="square" v-bind:style="{width:value + 'px',background:color}"></div>
+                </label>
+            </div>
+            <div class="list">
+                <input type="text" placeholder="Введите новое животное" @keyup.enter="addAnimal" v-model="newAnimal">
+                <div v-for="item in animals">{{item}}</div>
+            </div>
+            <div class="list">
+                <button class='but' @click='addNum'>Ok</button>
+                <div v-for="item in numbers">{{item}}</div>
+            </div>
+            <div class="colorImg">
+                <div class="colorBoxes">
+                    <div class="colorBox" v-for="(item,index) in colorImg" @click="setImg(index)"
+                        v-bind:style="{width:100 +'px',height:100 + 'px',background:item.color}"></div>
+                </div>
+                <div class="imgBox"><img :src="currentImg.img"></div>
+            </div>
+            <div class="misli">
+                <h1>Мысли...</h1>
+                <label for="mislya">
+                    Добавьте сообщение:
+                    <input type="text" name="mislya" id="mislya" v-model='newMislya'>
+                    <button class='button' @click="addMislya">Опубликовать</button>
+                </label>
+                    <div v-for="(item,index) in misli" @dblclick="removeMisli(index)">{{item}}</div>
+            </div>
+            <div class="zadachi">
+                <ul>
+                    <li v-for="(item,index) in zadachi" v-bind:style="{textDecoration:line}" @click='zadachaDone(index)'>{{item}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

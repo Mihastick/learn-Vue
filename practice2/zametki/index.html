@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="https://unpkg.com/vue@next"></script>
+    <script defer src="main.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <div class="cont">
+            <h1>Список заметок</h1>
+            <label for="inp">
+                <input type="text" name="inp" v-model="newZametka">
+            </label>
+            <button @click="addZametka">Добавить</button>
+            <hr>
+            <div class="zametki" v-for="(item,index) in zametki">{{item}} <button @click="removeZametka(index)">Удалить</button> </div>
+            <hr>
+            <p>Общее количество заметок: {{count}}</p>
+        </div>
+    </div>
+</body>
+</html>

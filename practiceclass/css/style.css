@@ -1,0 +1,21 @@
+.content {
+    min-height:100px;
+    padding:1em;
+    border:1px solid black;
+}
+.array-li {
+    list-style: none;
+    padding:1em;
+    max-width:300px;
+    border:1px solid black;
+    background:rgb(206, 205, 205);
+    margin-top:0.5em;
+    margin-bottom:0.5em;
+    cursor: pointer;
+}
+
+.active {
+    background: rgb(201, 136, 207);
+}
+    
+

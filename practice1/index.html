@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning VUE</title>
+    <script defer src="https://unpkg.com/vue@next"></script>
+    <script defer src='main.js'></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="app">
+        <div v-if='activeFire' class="fireworks"></div>
+        <div id="modal">
+            <form class='form2'>
+                <label for="name">
+                   <span class='for-form'>Имя:</span> 
+                    <p>{{name}}</p>
+                </label>
+                <label for="surname">
+                    <span class='for-form'>Фамилия:</span>
+                    <p>{{surname}}</p>
+                </label>
+                <label for="email">
+                   <span class='for-form'>Email:</span> 
+                    <p>{{email}}</p>
+                </label>
+                <label for="age">
+                   <span class='for-form'>Возраст:</span> 
+                    <p>{{age}}</p>
+                </label>
+                <button @click='Rel' class='but'>Назад</button>
+            </form>
+        </div>
+        <h1>{{ hello }}</h1>
+        <input type="number" v-model='x'>
+        <span>+</span>
+        <input type="number" v-model='y'>
+        <button @click='getSum'>Вычислить</button>
+        <p>{{res}}</p>
+        <hr>
+        <button @click='calcClick'>Количество щелчков: {{countClick}}</button>
+        <p v-show='countClick %2 !== 0'>1111111111</p>
+        <p v-show='countClick %2 == 0'>2222222222</p>
+        <hr>
+        <!-- <img :src="img" alt=""> -->
+        <p>{{getTodayAndTomorrowDate()}} </p>
+        <hr>
+        <input type="number" v-model='chislo'>
+        <button @click='chetNechet'>Ввод</button>
+        <hr>
+        <input type="number" v-model='question'>
+        <button @click='Ugadayka'>Начать игру</button>
+        <button @click='ProverkaUgadayka'>Проверка</button>
+        <hr>
+        <form class='form'>
+            <label for="name">
+               <span class='for-form'>Имя:</span> 
+                <input type="text" v-model='name' name='name'>
+            </label>
+            <label for="surname">
+                <span class='for-form'>Фамилия:</span>
+                <input type="text" v-model='surname' name='surname'>
+            </label>
+            <label for="email">
+               <span class='for-form'>Email:</span> 
+                <input type="email" v-model='email' name="email">
+            </label>
+            <label for="age">
+               <span class='for-form'>Возраст:</span> 
+                <input type="text" v-model='age' name='age'>
+            </label>
+            <button type="button" @click='Authorisation' class='but'>ОК</button>
+        </form>
+        <div class="menu">
+            <ul>
+                <li><a href="">Cat</a></li>
+                <li><a href="">Dog</a></li>
+                <li><a href="">Dog-Cat</a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>
